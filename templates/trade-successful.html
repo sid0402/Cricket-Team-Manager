@@ -1,0 +1,167 @@
+{%extends 'main.html'%}
+
+{%block content%}
+
+<html>
+<head>
+    <style>
+        h1 {
+            width:100%;
+            background-color: green;
+            color:white;
+            border: 1px black solid;
+            text-align: center;
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+        .teams{
+            display:inline-flex;
+            width:100%;
+        }
+        .team1,.team2{
+            width: 47%;
+            border: 1px solid black;
+            display:block;
+            text-align: center;
+        }
+        .team1 {
+            margin-right:3%;
+        }
+        .info{
+            width:100%;
+            display: block;
+            border-bottom: 1px solid black;
+        }
+        .player{
+            width:100%;
+            height:100%;
+            display: inline-flex;
+            border-bottom: 1px solid black;
+        }
+        .playerinfo{
+
+        }
+        .playersubinfo{
+            display: block;
+            width: 80%;            
+        }
+        .playerinfodiv{
+            width:100%;
+            display:inline-flex;
+            border-left: 1px black solid;
+            font-size: 14px;
+            text-align: left;
+            padding-left: 10px;
+        }
+        .salary{
+            width:100%;
+            text-align: right;
+            padding-right:10px;
+        }
+        img{
+            width:100px;
+            height:100px;
+        }
+        input[type=submit] {
+            border-radius: 9px;
+            padding: 12px 14px;
+            background-color: green;
+            color:white;
+            position:relative;
+            left:685px;
+            top:50px;
+        }
+        textarea{
+            width:90%;
+            height:200px;
+            margin-left: 5%;
+            border-radius: 4px;
+        }
+        input[type=text]{
+            position:relative;
+            left:39%;
+            width: 20%;
+            padding: 8px 12px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .discussion{
+            width:100%;
+            text-align: center;
+        }
+        form {
+            height:100%;
+            margin-bottom: 100px;
+        }
+
+    </style>
+</head>
+<body>
+<h1>TRADE SUCCESSFUL!</h1>
+<div class="teams">
+<div class="team1">
+    <div class="info">
+        <h2>{{team1}}</h2>
+        <h2>Amount gained: {{net1}} Cr</h2>
+    </div>
+    <div class="playerinfo">
+    {% for player in players %}
+    {% if player.team == team1 %}
+        <div class="player">
+            <img src='{{player.image}}'>
+            <div class="playerinfodiv">
+            <div class='playersubinfo'>
+            <h2>{{player.name}}</h2>
+            <h2 style='font-weight: lighter; font-size:medium'>{{player.role}}</h2>
+        </div>
+            <h2 class="salary">{{player.salary}} Cr</h2>
+            </div>
+        </div>
+    {% endif %}
+    {% endfor %}     
+</div>
+</div>
+<div class="team2">
+    <div class="info">
+        <h2>{{team2}}</h2>
+        <h2>Amount gained: {{net2}} Cr</h2>
+        {% if type == 'compensation' %}
+        <h2>The amount {{team2}} pays is {{compensation}} Cr</h2>
+        {% endif %}
+    </div>
+    <div class="playerinfo">
+        {% for player in players %}
+        {% if player.team == team2 %}
+        <div class="player">
+            <img src='{{player.image}}'>
+            <div class="playerinfodiv">
+            <div class='playersubinfo'>
+            <h2>{{player.name}}</h2>
+            <h2 style='font-weight: lighter; font-size:medium'>{{player.role}}</h2>
+        </div>
+            <h2 class="salary">{{player.salary}} Cr</h2>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}  
+    </div>
+</div>
+</div>
+
+<form name="submitted" action="submitted/" method="POST">
+    {% csrf_token %}
+    <br>
+    <br>
+    <h2 class="discussion">Discuss and submit your trade</h2>
+    <input type="text" name="title" placeholder="Title">
+    <br>
+    <br>
+    <textarea name="description" rows = '10' columns = '30'>Explain your trade</textarea>
+    <br>
+    <input type="Submit" value="Finalize Trade">
+</form>
+</body>
+</html>
+
+
+{%endblock content%}

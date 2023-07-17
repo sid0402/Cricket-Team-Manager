@@ -1,0 +1,126 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .team{
+            display:block;
+        }
+        .row1, .row2{
+            display:inline-flex;
+            width:100%;
+            text-align: center;
+            position:relative;
+            left:150px;
+            gap:0px;
+        }
+        .row2{
+            position:relative;
+            left:250px;
+        }
+        img{
+            width:200px;
+            height:200px;
+        }
+        .player{
+            text-align: center;
+        }
+        .titlesection{
+            text-align: center;
+            text-decoration: underline;
+        }
+        .social{
+            position:absolute;
+            top:7%;
+            right:2.5%;
+            border-radius: 9px;
+            padding: 12px 14px;
+            text-align: center;
+            display:inline-flex;
+        }
+        .facebook,.twitter,.reddit{
+            padding:8px 8px;
+            border-radius:12px;
+            border:1px solid black;
+            margin-right:10px;
+            text-decoration: none;
+        }
+        .facebook{
+            background-color: darkblue;
+            color:white;
+        }
+        .twitter{
+            background-color: dodgerblue;
+            color:white;
+        }
+        .reddit{
+            background-color: red;
+            color:white;
+        }
+        a:link {
+  color: white;
+}
+a{
+    text-decoration: none;
+}
+/* visited link */
+a:visited {
+  color: white;
+}
+
+/* mouse over link */
+a:hover {
+  color: white;
+}
+
+/* selected link */
+a:active {
+  color: white;
+}
+    </style>
+</head>
+<body>
+<div class="titlesection">
+    <h1>YOUR {{chosen_team}} TEAM</h1>
+</div>
+<div class="team">
+<div class="row1">
+{% for player in row1 %}
+<div class="player">
+<h3>{{player.name}}</h3>
+<img src="{{player.image}}" width="100px" height="100px">
+</div>
+{% endfor %}
+</div>
+<div class="row2">
+{% for player in row2 %}
+<div class="player">
+<img src="{{player.image}}" width="100px" height="100px">
+<h3>{{player.name}}</h3>
+</div>
+{% endfor %}
+</div>
+</div>
+<div class="impact">
+<div class="player">
+<h2 style="text-decoration:underline;">IMPACT PLAYER</h2>
+{% for player in impact %}
+<img src="{{player.image}}" width="100px" height="100px">
+<h3>{{player.name}}</h3>
+{% endfor %}
+</div>
+</div>
+<div class="social">
+{% load social_share %}
+<div class="facebook">{% post_to_facebook object_or_url %}</div>
+<div class="twitter">{% post_to_twitter object_or_url %}</div>
+<div class="reddit">{% post_to_reddit object_or_url %}</div>
+
+
+</div>
+
+</body>
+</html>
+{% endblock content %}

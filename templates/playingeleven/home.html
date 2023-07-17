@@ -1,0 +1,102 @@
+{% extends 'main.html'%}
+
+{% block content %}
+
+<html>
+<head>
+    <style>
+        select {
+            background-color: #05096B;
+            color: white;
+            border-radius: 6px;
+            padding: 8px 7px;
+            font-size: 14px;
+            text-align: center;
+        }
+        .s {
+            background-color: #05096B;
+            color: white;
+            border-radius: 6px;
+            padding: 8px 7px;
+            font-size: 14px;
+        }
+
+        .title {
+            text-align: center;
+            border-bottom: 1px black solid;
+        }
+        .information,.form{
+            width:48%;
+            float:left;
+            display: block;
+        }
+        .information{
+            border-right: 1px black solid;
+            margin-left:20px;
+            height:800px;
+        }
+        .form{
+                height:800px;
+                text-align: center;
+            }
+        .infocontent{
+            width:100%;
+        }
+        .form select{
+            position:relative;
+            top:200px;
+            left:50px;
+            padding:16px 16px;
+            border-radius: 12px;
+            font-size: 16px;
+        }
+        .form{
+            display:block;
+        }
+        .form input{
+            position: relative;
+            top:275px;
+            left:-120px;
+            padding:16px 16px;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<h1 class="title">TEAM SELECTOR: PICK A PLAYING 11 FOR ANY IPL TEAM!</h1>
+<div class="information">
+        <div class="infocontent">
+        <h2 style="text-decoration: underline; text-align: center;">How does it work?</h2>
+        <div class="info"></div>
+        <h2>1. Select the team you want to make a playing 11 with and press submit</h3>
+        <h2>2. In order to make a playing 11 for a custom squad with trades, submit a trade first and make your playing 11!</h3>
+        <h2>3. Enter the players for each of the positions</h3>
+        <h2>4. Share your team on social media!</h2>
+    </div>
+    </div>
+</div>
+<div class="form">
+    <h2 style="text-decoration:underline;">Pick a team!</h2>
+<form method="POST" action="selector/">
+    {%csrf_token%}
+    <select name="team" id="team">
+        <option value="none" selected disabled hidden>Choose the first team</option>
+        <option value="Mumbai Indians">Mumbai Indians</option>
+        <option value="Chennai Super Kings">Chennai Super Kings</option>
+        <option value="Kolkata Knight Riders">Kolkata Knight Riders</option>
+        <option value="Rajasthan Royals">Rajasthan Royals</option>
+        <option value="Gujarat Titans">Gujurat Titans</option>
+        <option value="Royal Challengers Bangalore">Royal Challengers Bangalore</option>
+        <option value="Delhi Capitals">Delhi Capitals</option>
+        <option value="Punjab Kings">Punjab Kings</option>
+        <option value="Sunrisers Hyderabad">Sunrisers Hyderabad</option>
+        <option value="Lucknow Super Giants">Lucknow Super Giants</option>
+    </select>
+    <input type="Submit" value="Submit" class="s">
+</form>
+</div>
+</body>
+</html>
+
+{% endblock content %}

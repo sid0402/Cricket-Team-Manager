@@ -1,0 +1,45 @@
+{%extends 'main.html'%}
+
+{%block content%}
+<html>
+<head>
+<style>
+    h1 {
+        width:100%;
+        background-color: green;
+        color:white;
+        border: 1px black solid;
+        text-align: center;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        }
+    .selectorredirect{
+        display:block;
+        text-align: center;
+        margin-top: 300px;
+    }
+
+    button{
+        padding: 12px 18px;
+        color: white;
+        border-radius: 8px;
+        background-color: #05096B;
+        font-size:16px;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+<h1>TRADE SUBMITTED AND POSTED</h1>
+
+<div class="selectorredirect">
+    <h2>MAKE A PLAYING 11 FOR BOTH TEAMS WITH THIS TRADE!</h2>
+    <form method="POST" action="/playing-eleven/selector/">
+        {%csrf_token%}
+        <button name="team" type="submit" value="{{team1}}">{{team1}}</button>
+        <button name="team" type="submit" value="{{team2}}">{{team2}}</button>
+    </form>
+</div>
+</body>
+</html>
+{%endblock content%}

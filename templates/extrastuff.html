@@ -1,0 +1,187 @@
+<!--SHOWING PLAYERS FROM EACH TEAM WHEN TEAMS ARE SUBMITTED--> 
+
+<div>
+    {%for player in players%}
+    {% if player.team == team1 %}
+    <h2>{{player.name}} -- {{player.team}} -- {{player.role}} -- {{player.salary}}</h2>
+    {%endif%}
+    {%endfor%}
+</div>
+
+<div>
+    {% for player in players %}
+    {% if player.team == team2 %}
+    <h2>{{player.name}} -- {{player.team}} -- {{player.role}} -- {{player.salary}}</h2>
+    {% endif %}
+    {% endfor %}
+</div>
+
+
+
+        <!--HAVE TO MAKE THESE READONLY INPUT VALUES INVISIBLE--> 
+        <label for="team1">{{team1}}</label>
+        <input type="text" id="team1" name="team1" value="{{team1}}" readonly>
+        <label for="team2">{{team2}}</label>
+        <input type="text" id="team2" name="team2" value="{{team2}}" readonly>
+
+
+
+<!--SAMPLE PLAYERS--> 
+
+players = [
+    {"name":"Ben Stokes", "role":"All-Rounder","salary":16.25,"team":"Chennai Super Kings"},
+    {"name":"Rishabh Pant", "role":"Wicket-Keeper","salary":16,"team":"Delhi Capitals"},
+    {"name":"Hardik Pandya", "role":"All-Rounder","salary":15,"team":"Gujurat Titans"},
+    {"name":"KL Rahul", "role":"Wicket-Keeper","salary":17,"team":"Lucknow Super Giants"},
+    {"name":"Cameron Green", "role":"All-Rounder","salary":17.5,"team":"Mumbai Indians"},
+    {"name":"Rohit", "role":"All-Rounder","salary":17.5,"team":"Mumbai Indians"},
+   {"name":"Miller", "role":"All-Rounder","salary":15,"team":"Gujurat Titans"}
+]
+
+
+'''
+    players_list = [player.name for player in players]
+
+    for p in Players.objects.filter(name=players_team1[0]):
+        player1_team = p.team
+    for p in Players.objects.filter(name=players_team2[0]):
+        player2_team = p.team
+
+    if (player1_team == chosen_team):
+        for p in players_team2:
+            players_list.append(p)
+    else:
+        for p in players_team1:
+            players_list.append(p)'''
+
+
+
+
+
+            body {
+                background-color: #05096B;
+            }
+
+            .team1 {
+                text-align: center;
+                padding: 0px;
+                position:absolute;
+                top:45%;
+                left:60%
+            }
+
+            .team2 {
+                text-align: center;
+                padding: 0px;
+                position:absolute;
+                top:55%;
+                left:60%
+            }
+
+            .l1 {
+                width: 150px;
+                border: 3px solid;
+                padding: 8px 14px;
+                position:absolute;
+                top:45%;
+                left:45%;
+                color:#ffffff;
+            }
+
+            .l2 {
+                width: 165px;
+                border: 3px solid;
+                padding: 8px 14px;
+                position:absolute;
+                top:55%;
+                left:45%;
+                color:#ffffff;
+            }
+
+            .radio {
+                overflow: hidden;
+                border-radius: 15px;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+                display: inline-flex;
+                position:absolute;
+                top: 65%;
+                left: 50%
+            }
+
+            .radio__input{
+                display: none;
+            }
+
+            .radio__label{
+                font-size: 14px;
+                white-space: normal;
+                padding: 10px 15px;
+                color:#ffffff;
+                background:green;
+                cursor:pointer;
+            }
+
+            .radio__label:not(:last-of-type) {
+                border-right: 1px solid black
+            }
+
+            .radio__input:checked + .radio__label{
+                background: gray
+            }
+
+            .s {
+                background-color: green;
+                border-radius: 5px;
+                width: 80px;
+                height: 30px;
+                position:absolute;
+                left: 53%;
+                top: 75%;
+            }
+
+
+            .radio__input{
+                height:50px;
+                
+                position:relative;
+                left: 50px;
+            }
+
+            .radio__label{
+                font-size: 14px;
+                white-space: normal;
+                padding: 14px 18px;
+                color:white;
+                background:#05096B;
+                cursor:pointer;
+            }
+
+            .radio__label:not(:last-of-type) {
+                border-right: 1px solid black
+            }
+
+            .radio__input:checked + .radio__label{
+                background: gray
+            }
+
+{% if post.trade_type == 'compensation' %}
+{% for num in range %}
+<h2>{{ players_team1.num }}</h2>
+<h2>{{ compensation.num }}</h2>
+<hr>
+
+
+
+.team1 {
+    position:absolute;
+    height:40%;
+    left:35%;
+    top: 40%;
+}
+
+.team2 {
+    position:absolute;
+    height:40%;
+    left:50%;
+    top: 40%;
+}

@@ -1,0 +1,122 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<html>
+    <head>
+        <style>
+            .radio {
+                overflow: hidden;
+                border-radius: 18px;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+                display: inline-flex;
+                background-color: #05096B;
+                color:white;
+                padding: 18px 18px;
+                position:relative;
+                left:40px;
+                top:155px;
+                font-size: 18px;
+                border-radius: 16px;
+            }
+            .s {
+                background-color: #05096B;
+                color: white;
+                font-size: 18px;
+                border-radius: 16px;
+                padding: 12px 18px;
+                text-align: center;
+                position:relative;
+                top:225px;
+                left:-125px;
+            }
+            select {
+                color: white;
+                background-color: #05096B;
+                padding: 8px 14px;
+                border-radius: 6px;
+            }
+            .titleinfo{
+                text-align:center;
+                border-bottom:2px solid black;
+                padding-bottom:0px;
+            }
+            .information, .form{
+                width:48%;
+                float:left;
+                display: block;
+            }
+            .form{
+                height:800px;
+                text-align: center;
+            }
+            .information{
+                height:800px;
+                border-right:2px black dotted;
+            }
+            .team1 select, .team2 select{
+                position:relative;
+                top: 125px;
+                border-radius: 12px;
+                padding: 18px 18px;
+                font-size: 18px;
+                text-align: center;
+            }
+            .team1 select{
+                margin-bottom: 20px;
+            }
+            .infocontent{
+                margin-left: 20px;
+                margin-right:10px;
+            }
+        </style>
+    </head>
+    <body>
+    <div class="titleinfo">
+        <h1>AUCTION SIMULATOR</h1>
+    </div>
+    <div class="information">
+        <div class="infocontent">
+        <h2 style="text-decoration: underline; text-align: center;">How does it work?</h2>
+        <div class="info"></div>
+        <h2>1. Select the team you want to use</h3>
+        <h2>2. Select the type of auction you want.</h3>
+        <div class="tradetypeinfo" style="padding-left:30px;">
+        <h2>a) Mega Auction: Retain just 4 players and build out your squad.</h3>
+        <h2>b) Mini Auction: No rules on maximum retentions.</h3>
+        </div>
+        <h2>3. Select the players you want under the budger and overseas player restrictions.</h3>
+        <h2>4. Once you are done, make trades with your new squad or build playing 11s!</h3>
+    </div>
+    </div>
+    <div class="form">
+        <h2 style="text-decoration: underline; text-align: center;">START TRADING!</h2>
+        <form name="teams" action="retain/" method="POST">
+            {%csrf_token%}
+            <div class="team1">
+            <select name="team" id="team">
+                <option value="none" selected disabled hidden>Choose your team</option>
+                <option value="Mumbai Indians">Mumbai Indians</option>
+                <option value="Chennai Super Kings">Chennai Super Kings</option>
+                <option value="Kolkata Knight Riders">Kolkata Knight Riders</option>
+                <option value="Rajasthan Royals">Rajasthan Royals</option>
+                <option value="Gujarat Titans">Gujurat Titans</option>
+                <option value="Royal Challengers Bangalore">Royal Challengers Bangalore</option>
+                <option value="Delhi Capitals">Delhi Capitals</option>
+                <option value="Punjab Kings">Punjab Kings</option>
+                <option value="Sunrisers Hyderabad">Sunrisers Hyderabad</option>
+                <option value="Lucknow Super Giants">Lucknow Super Giants</option>
+            </select>
+        </div>
+        <div class="radio">
+            <input type="radio" class="radio__input" id="auction_type" name="auction_type" value="mega">
+            <label for="trade_type" class="radio__label">Mega Auction</label>
+            <input type="radio" class="radio__input" id="auction_type" name="auction_type" value="mini">
+            <label for="trade_type" class="radio__label">Mini Auction</label>
+        </div>
+        <input class="s" type="Submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
+
+{% endblock content %}

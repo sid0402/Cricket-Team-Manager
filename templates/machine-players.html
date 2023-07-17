@@ -1,0 +1,167 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        .team1, .team2 {
+            width:47%;
+            float: left;
+            display: flex;
+            flex-flow: row wrap;
+            max-width: 710px;
+            align-content: stretch;
+            position:relative;
+            top:-50px;
+            border: 1px solid black;
+        }
+
+        .team1 {
+            margin-right: 3%;
+        }
+
+        .checkbox__input1, .checkbox__input2{
+            opacity: 0;
+            height:70px;
+            width:70px;
+            position: relative;
+            left:16%;
+            top:60px;
+        }
+
+        div.box{
+            display:inline-block;
+            width: 155px;
+            text-align: center;
+            height:220px;
+
+        }
+        .checkbox__input1:checked + div.box, .checkbox__input2:checked + div.box{
+                background-color: lightgray;
+            }
+
+        img{
+            width:150px;
+            height:150px;
+        }
+
+        .team1__info, .team2__info{
+            width:100%;
+        }
+
+        h2{
+            text-align: center;
+        }
+
+        h3 {
+            margin-left: 15px;
+        }
+
+        input[type=submit] {
+            position:absolute;
+            top:7%;
+            right:2.5%;
+            border-radius: 9px;
+            padding: 12px 14px;
+            background-color: green;
+            color:white;
+        }
+
+        .specificinfo{
+            display: inline-flex;
+            width:100%;
+        }
+
+        .oplayers, .salary {
+            width:50%;
+            text-align: center;
+            display:block;
+            border: 1px solid black;
+            border-right: none;
+            position: relative;
+            top:10px;
+        }
+
+        .info_firstrow {
+            border-bottom: 1px solid black;
+            padding-bottom: 5px;
+        }
+
+    </style>
+
+    </style>
+</head>
+<body>
+    <h1>Player-for-Player Trade</h1>
+<div>
+    <form name="trade" action = "trade/" method="POST">
+        {% csrf_token %}
+        <br>
+        <br>
+        <div class="team1">
+            <div class="team1__info">
+                <h2>{{team1}}</h2>
+                <div class="specificinfo">
+                    <div class="oplayers">
+                    <h3 class="info_firstrow">{{team1_players}}</h3>
+                    <h3>Overseas Players</h3>
+                </div>
+                <div class="salary">
+                    <h3 class='info_firstrow'>{{team1_salary}}</h3>
+                    <h3>Team Salary</h3>
+                </div>
+                </div>
+                <hr>      
+            </div>
+        {% for player in players %}
+        {% if player.team == team1 %}
+        <input type="checkbox" class="checkbox__input1" id="player_team1" name = "player_team1" value="{{player.name}}">
+        <div class="box">
+        <img src="{{player.image}}"width="200" height="200" class="checkbox__image"> <br>
+        <label for="player_team1" class="checkbox__label">{{player.name}}</label> <br>
+        <label for="player_team1" class="checkbox__label">{{player.salary}} Cr</label>
+        </div>
+        {% endif %}
+        {% endfor %}
+        </div>
+        <div class="team2">
+            <div class="team2__info">
+                <h2>{{team2}}</h2>
+                <div class="specificinfo">
+                    <div class="oplayers">
+                    <h3 class="info_firstrow">{{team2_players}}</h3>
+                    <h3>Overseas Players</h3>
+                </div>
+                <div class="salary">
+                    <h3 class="info_firstrow">{{team2_salary}}</h3>
+                    <h3>Team Salary</h3>
+                </div>
+                </div>
+            <hr>       
+            </div>
+        {% for player in players %}
+        {% if player.team == team2 %}
+        <input type="checkbox" class="checkbox__input2" id="player_team2" name = "player_team2" value="{{player.name}}">
+        <div class="box">
+        <img src="{{player.image}}"width="200" height="200"> <br>
+        <label for="player_team2"class="checkbox__label">{{player.name}}</label> <br>
+        <label for="player_team2"class="checkbox__label">{{player.salary}} Cr</label>
+        </div>
+        {% endif %}
+        {% endfor %}
+        </div>
+        <br>
+        <br>
+        <input type="Submit" value="Try Trade">
+    </form>
+
+</div>
+
+</body>
+
+{% endblock content %}

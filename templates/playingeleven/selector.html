@@ -1,0 +1,227 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<html>
+<head>
+    <style>
+        .caption{
+            display:block;
+            font-family: sans-serif;
+            font-size: 15px;
+            text-align: center;
+        }
+
+        .batsmen,.allrounder,.keeper,.bowler {
+            display: inline-flex;
+            flex-flow: row wrap;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        h1{
+            text-align: center;
+        }
+
+        span.row1 select.select1{
+            margin-left:250px;
+        }
+
+        span.row2 select.select2{
+            margin-left:350px;
+        }
+
+        select {
+            padding: 5px 6px;
+            margin-right:4px;
+            text-align: center;
+        }
+        img{
+            width:150px;
+            height:150px;
+        }
+        figcaption{
+            font-size: large;
+        }
+        .impact{
+            text-align: center;
+            position:relative;
+            left:-20px;
+        }
+        input[type=submit] {
+            position:absolute;
+            top:7%;
+            right:2.5%;
+            border-radius: 9px;
+            padding: 12px 14px;
+            background-color: green;
+            color:white;
+        }
+    </style>
+<script>
+    function allowDrop(ev) {
+    ev.preventDefault();
+    }
+
+    function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+    }
+</script>
+</head>
+<h1 class="title">Pick a playing 11 for {{team1}}</h1>
+<br>
+
+
+<form method="POST" action="/playing-eleven/team/" class="selectform">
+    {%csrf_token%}
+    <span class="row1">
+    <select name="playing-eleven" id="team" class="select1">
+        <option value=none selected disabled hidden>1.Select player</option>
+        {% for player in players %}
+        <option value="{{player.name}}" class="playerlist">{{player.name}} <img src="{{player.image}}"width="100" height="100"></option>
+        {% endfor %}
+    </select>
+
+    <select name="playing-eleven" id="playing-eleven" class="selectteam">
+        <option value=none selected disabled hidden>2.Select player</option>
+        {% for player in players %}
+        <option value="{{player.name}}" class="playerlist">{{player.name}} <img src="{{player.image}}"width="100" height="100"></option>
+        {% endfor %}
+    </select>
+    <select name="playing-eleven" id="playing-eleven" class="selectteam">
+        <option value=none selected disabled hidden>3.Select player</option>
+        {% for player in players %}
+        <option value="{{player.name}}" class="playerlist">{{player.name}} <img src="{{player.image}}"width="100" height="100"></option>
+        {% endfor %}
+    </select>
+    <select name="playing-eleven" id="playing-eleven" class="selectteam">
+        <option value=none selected disabled hidden>4.Select player</option>
+        {% for player in players %}
+        <option value="{{player.name}}" class="playerlist">{{player.name}} <img src="{{player.image}}"width="100" height="100"></option>
+        {% endfor %}
+    </select>
+    <select name="playing-eleven" id="playing-eleven" class="selectteam">
+        <option value=none selected disabled hidden>5.Select player</option>
+        {% for player in players %}
+        <option value="{{player.name}}" class="playerlist">{{player.name}} <img src="{{player.image}}"width="100" height="100"></option>
+        {% endfor %}
+    </select>
+    <select name="playing-eleven" id="playing-eleven" class="selectteam">
+        <option value=none selected disabled hidden>6.Select player</option>
+        {% for player in players %}
+        <option value="{{player.name}}" class="playerlist">{{player.name}} <img src="{{player.image}}"width="100" height="100"></option>
+        {% endfor %}
+    </select>
+</span>
+    <br>
+    <br>
+    <span class="row2">
+        <select name="playing-eleven" id="playing-eleven" class="select2">
+            <option value=none selected disabled hidden>7.Select player</option>
+            {% for player in players %}
+            <option value="{{player.name}}" class="playerlist">{{player.name}} <img src="{{player.image}}"width="100" height="100"></option>
+            {% endfor %}
+        </select>
+        <select name="playing-eleven" id="playing-eleven" class="selectteam">
+            <option value=none selected disabled hidden>8.Select player</option>
+            {% for player in players %}
+            <option value="{{player.name}}" class="playerlist">{{player.name}} <img src="{{player.image}}"width="100" height="100"></option>
+            {% endfor %}
+        </select>
+        <select name="playing-eleven" id="playing-eleven" class="selectteam">
+            <option value=none selected disabled hidden>9.Select player</option>
+            {% for player in players %}
+            <option value="{{player.name}}" class="playerlist">{{player.name}} <img src="{{player.image}}"width="100" height="100"></option>
+            {% endfor %}
+        </select>
+        <select name="playing-eleven" id="playing-eleven" class="selectteam">
+            <option value=none selected disabled hidden>10.Select player</option>
+            {% for player in players %}
+            <option value="{{player.name}}" class="playerlist">{{player.name}} <img src="{{player.image}}"width="100" height="100"></option>
+            {% endfor %}
+        </select>
+        <select name="playing-eleven" id="playing-eleven" class="selectteam">
+            <option value=none selected disabled hidden>11.Select player</option>
+            {% for player in players %}
+            <option value="{{player.name}}" class="playerlist">{{player.name}} <img src="{{player.image}}"width="100" height="100"></option>
+            {% endfor %}
+        </select>
+    </span>
+    <br>
+    <br>
+    <div class="impact">
+        <select name="playing-eleven" id="playing-eleven" class="selectteam">
+            <option value=none selected disabled hidden>Select Impact Player</option>
+            {% for player in players %}
+            <option value="{{player.name}}" class="playerlist">{{player.name}} <img src="{{player.image}}"width="100" height="100"></option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="s">
+        <input type="submit" value="Make Team">
+    </div>
+</form>
+
+<br>
+<br>
+
+<h1>{{team1}} Squad</h1>
+<section class="squad">
+    <h2>Batsmen</h2>
+<div class="batsmen">
+{% for player in players%}
+{% if player.role == 'Batter'%}
+<figure class="playerbox">
+<img class = "playerimage" id ="drag1" src="{{player.image}}"width="150" height="150" draggable="true" ondragstart=drag(event)>
+<figcaption class="caption">{{player.name}}</figcaption>
+</figure>
+{% endif %}
+{% endfor %}
+</div>
+<br>
+<h2>All-Rounders</h2>
+<div class="allrounder">
+{% for player in players%}
+{% if player.role == 'All-Rounder'%}
+<figure class="playerbox">
+<img class = "playerimage" id ="drag1" src="{{player.image}}"width="100" height="100" draggable="true" ondragstart=drag(event)>
+<figcaption class="caption">{{player.name}}</figcaption>
+</figure>
+{% endif %}
+{% endfor %}
+</div>
+<br>
+<h2>Wicket-Keepers</h2>
+<div class="keeper">
+{% for player in players%}
+{% if player.role == 'Wicket-Keeper'%}
+<figure class="playerbox">
+<img class = "playerimage" id ="drag1" src="{{player.image}}"width="100" height="100" draggable="true" ondragstart=drag(event)>
+<figcaption class="caption">{{player.name}}</figcaption>
+</figure>
+{% endif %}
+{% endfor %}
+</div>
+<br>
+<h2>Bowlers</h2>
+<div class="bowler">
+{% for player in players%}
+{% if player.role == 'Bowler'%}
+<figure class="playerbox">
+<img class = "playerimage" id ="drag1" src="{{player.image}}"width="100" height="100" draggable="true" ondragstart=drag(event)>
+<figcaption class="caption">{{player.name}}</figcaption>
+</figure>
+{% endif %}
+{% endfor %}
+</div>
+</section>
+
+</html>
+
+{% endblock content %}
