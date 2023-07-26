@@ -13,7 +13,7 @@ https://github.com/sid0402/IPL-Manager/assets/36813259/e14adceb-4e17-440f-80be-f
 
 https://github.com/sid0402/IPL-Manager/assets/36813259/7af35dbd-df83-432e-aa1f-150240a061e5
 
-
 ## Playing 11 Builder
+https://github.com/sid0402/IPL-Manager/assets/36813259/41d9938d-0c62-4486-82e2-fd301a8da809
 
 # To Do
