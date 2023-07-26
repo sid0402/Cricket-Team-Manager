@@ -17,6 +17,6 @@ https://github.com/sid0402/IPL-Manager/assets/36813259/7af35dbd-df83-432e-aa1f-1
 https://github.com/sid0402/IPL-Manager/assets/36813259/41d9938d-0c62-4486-82e2-fd301a8da809
 
 # To Do
-[] Deploy Machine Learning model to predict the prices of players in the auction
-[] Create a User Login system
-[] Improve and deploy the forum section fully, integrated with the user login system
+- Deploy Machine Learning model to predict the prices of players in the auction
+- Create a User Login system
+- Improve and deploy the forum section fully, integrated with the user login system
