@@ -3,13 +3,162 @@
 <html>
     <head>
         <style>
-
+            h1 {
+                text-align: center;
+            }
+            h2 {
+                text-align: center;
+            }
+            .retainform{
+                text-align: center;
+                display:inline;
+            }
+            .batsmen,.allrounder,.keeper,.bowler {
+            display: inline-flex;
+            flex-flow: row wrap;
+            overflow: hidden;
+            width: 100%;
+        }
+        img{
+            width:150px;
+            height:150px;
+        }
+        select {
+            padding: 5px 6px;
+            margin-right:4px;
+            text-align: center;
+            border-radius: 4px;
+        }
+        input[type=submit] {
+            position:absolute;
+            top:9%;
+            right:2.5%;
+            border-radius: 9px;
+            padding: 12px 14px;
+            background-color: green;
+            color:white;
+        }
+        .squad {
+            position: relative;
+            top: 10px;
+        }
+        .ret1, .ret2,.ret3, .ret4 {
+            margin-bottom: 10px;
+        }
+        .retprice {
+            position: relative;
+            display: inline-flex;
+            margin-right:10px;
+        }
+        .caption{
+            display:block;
+            font-family: sans-serif;
+            font-size: 15px;
+            text-align: center;
+        }
         </style>
     </head>
     <body>
-        <h1>Choose which players you want to retain</h1>
-        <h1>{{team}}</h1>
-        <h1>{{auction_type}}</h1>
+        <h1>Mega Auction retention: {{team}}</h1>
+        <div class="retainform">
+        <form method="POST" action="/auction/simulate/" class="selectform">
+            {%csrf_token%}
+            <div class="ret1">
+                <h3 class="retprice">16 Cr</h3>
+            <select name="ret1" id="team" class="select1">
+                <option value=none selected disabled hidden>Retention 1</option>
+                {% for player in players %}
+                <option value="{{player.name}}" class="playerlist">{{player.name}} <img src="{{player.image}}"width="100" height="100"></option>
+                {% endfor %}
+                <option value="">None</option>
+            </select>
+        </div>
+        <div class="ret2">
+            <h3 class="retprice">12 Cr</h3>
+            <select name="ret2" id="team" class="select1">
+                <option value=none selected disabled hidden>Retention 2</option>
+                {% for player in players %}
+                <option value="{{player.name}}" class="playerlist">{{player.name}} <img src="{{player.image}}"width="100" height="100"></option>
+                {% endfor %}
+                <option value="">None</option>
+            </select>
+        </div>
+        <div class="ret3">
+            <h3 class="retprice">8 Cr</h3>
+            <select name="ret3" id="team" class="select1">
+                <option value=none selected disabled hidden>Retention 3</option>
+                {% for player in players %}
+                <option value="{{player.name}}" class="playerlist">{{player.name}} <img src="{{player.image}}"width="100" height="100"></option>
+                {% endfor %}
+                <option value="">None</option>
+            </select>
+        </div>
+        <div class="ret4">
+            <h3 class="retprice">6 Cr</h3>
+            <select name="ret4" id="team" class="select1">
+                <option value=none selected disabled hidden>Retention 4</option>
+                {% for player in players %}
+                <option value="{{player.name}}" class="playerlist">{{player.name}} <img src="{{player.image}}"width="100" height="100"></option>
+                {% endfor %}
+                <option value="">None</option>
+            </select>
+        </div>
+            <div class="s">
+                <input type="submit" value="Proceed">
+            </div>
+        </form>
+    </div>
+
+<div class="squad">
+    <h1>{{team1}} Squad</h1>
+    <h2>Batsmen</h2>
+<div class="batsmen">
+{% for player in players%}
+{% if player.role == 'Batter'%}
+<figure class="playerbox">
+<img class = "playerimage" id ="drag1" src="{{player.image}}"width="150" height="150" draggable="true" ondragstart=drag(event)>
+<figcaption class="caption">{{player.name}}</figcaption>
+</figure>
+{% endif %}
+{% endfor %}
+</div>
+<br>
+<h2>All-Rounders</h2>
+<div class="allrounder">
+{% for player in players%}
+{% if player.role == 'All-Rounder'%}
+<figure class="playerbox">
+<img class = "playerimage" id ="drag1" src="{{player.image}}"width="100" height="100" draggable="true" ondragstart=drag(event)>
+<figcaption class="caption">{{player.name}}</figcaption>
+</figure>
+{% endif %}
+{% endfor %}
+</div>
+<br>
+<h2>Wicket-Keepers</h2>
+<div class="keeper">
+{% for player in players%}
+{% if player.role == 'Wicket-Keeper'%}
+<figure class="playerbox">
+<img class = "playerimage" id ="drag1" src="{{player.image}}"width="100" height="100" draggable="true" ondragstart=drag(event)>
+<figcaption class="caption">{{player.name}}</figcaption>
+</figure>
+{% endif %}
+{% endfor %}
+</div>
+<br>
+<h2>Bowlers</h2>
+<div class="bowler">
+{% for player in players%}
+{% if player.role == 'Bowler'%}
+<figure class="playerbox">
+<img class = "playerimage" id ="drag1" src="{{player.image}}"width="100" height="100" draggable="true" ondragstart=drag(event)>
+<figcaption class="caption">{{player.name}}</figcaption>
+</figure>
+{% endif %}
+{% endfor %}
+</div>
+</div>
     </body>
 </html>
 {% endblock content %}

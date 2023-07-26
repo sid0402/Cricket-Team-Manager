@@ -21,8 +21,8 @@ from sklearn.svm import SVR
 
 df = pd.read_csv('ml/df_bar.csv')
 
-df = df[df['Role_Bowler']==1]
-print(df)
+df = df[df['Role_All-Rounder']==0]
+#print(df)
 
 #Make different dfs based on roles
 def make_dfs(df):
@@ -42,6 +42,27 @@ def drop_bowldf(df):
        'Strike Rate','prog_bowlsr', 'prog_er', 'prog_wkts', 'prog_bowlavg']
     df = df.drop(bowl_col, axis=1)
     return df
+
+cat_columns = ['Role_All-Rounder', 'Role_Batsman',
+       'Role_Bowler', 'Role_Wicket Keeper', 'Nation_Indian',
+       'Nation_Overseas', 'Mega']
+
+def skew_high(df):
+    skew_col = []
+    for i in df.columns:
+        if (i != 'Amount' and not(i in cat_columns) and df[i].skew() > 1.5):
+            skew_col.append(i)
+    return skew_col
+
+skew_col = skew_high(df)
+print(skew_col)
+
+def transform_log(df):
+    for i in skew_col:
+        df[i] = np.log(df[i]+0.5)
+    return df
+
+#df = transform_log(df)
 
 def find_feat(df, thresh=0.85):
     col_corr = set()
@@ -90,8 +111,7 @@ def cor_selector(X, y,num_feats):
     # feature selection? 0 for not select, 1 for select
     cor_support = [True if i in cor_feature else False for i in feature_name]
     return cor_support, cor_feature
-
-cor_support, cor_feature = cor_selector(X,Y,15)
+cor_support, cor_feature = cor_selector(X_feat,Y,15)
 X_feat = X_feat[cor_feature]
 print(cor_feature)
 
@@ -148,7 +168,7 @@ def kfold(X_train,y_train, nfolds, model):
     preds = cross_val_predict(predictor, X_train, y_train, cv=folds)
     print(scores)
     return scores, preds
-print((kfold(X_feat,Y,4,SVR(C=10,gamma=1)))[0].mean())
+print((kfold(X_feat,Y,4,LinearRegression()))[0].mean())
 
 
 def loocv(X_train, y_train, model):
@@ -157,9 +177,8 @@ def loocv(X_train, y_train, model):
     scores = cross_val_score(predictor, X_train, y_train, scoring='neg_mean_absolute_error', cv=cv, n_jobs=-1)
     y_pred = cross_val_predict(model, X_train, y_train, cv=cv, n_jobs=-1)
     return y_pred,scores
-y_pred, scores = loocv(X_feat,Y,SVR(C=10,gamma=1))
-
-#print(scores.mean())
+y_pred, scores = loocv(X_feat,Y,LinearRegression())
+print(scores.mean())
 #print(len(y_pred))
 #print(len(X_feat))
 

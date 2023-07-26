@@ -10,19 +10,38 @@ def home(request):
 
 def selector(request):
     chosen_team = request.POST.get('team')
-    print(chosen_team)
     request.session['chosen_team'] = chosen_team
 
     flag = request.session['flag']
+    
+    if (request.POST.get('flag')):
+        flag_auction = int(request.POST.get('flag'))
+    else:
+        flag_auction=0
+
+    request.session['flag_auction'] = flag_auction
+    auction_type = request.session['auction_type']
 
     players_team1 = request.session['players_team1']
     players_team2 = request.session['players_team2']
     trade_type = request.session['trade_type']
+    
     players = Players.objects.filter(team=chosen_team)
 
-    print(flag)
-
-    if (flag==True):
+    if (flag_auction == 2):
+        if (auction_type == 'mega'):
+            auction_team = request.session['new_team']
+            players = Players.objects.filter(name__in=auction_team[0])
+            auction_team = request.session['auction_team']
+            context = {'players':players,'team1':auction_team}
+            return render(request, 'playingeleven/selector.html', context)
+        elif (auction_type == 'mini'):
+            miniauction_team = request.session['miniauction_team']
+            players = Players.objects.filter(name__in=miniauction_team)
+            auction_team = request.session['auction_team']
+            context = {'players':players,'team1':auction_team}
+            return render(request, 'playingeleven/selector.html', context)
+    elif (flag==1):
         if (len(players_team1) != 0):
             for p in players_team1:
                 players = players.exclude(name=p)
@@ -64,13 +83,23 @@ def selector(request):
     return render(request, 'playingeleven/selector.html', context)
 
 def team(request):
-    chosen_team=request.session['chosen_team']
+    flag_auction = int(request.session['flag_auction'])
+    if (flag_auction==2):
+        chosen_team = request.session['auction_team']
+    else:
+        chosen_team=request.session['chosen_team']
     team = request.POST.getlist('playing-eleven')
     row1=team[0:6]
     row2=team[6:11]
-    impact=team[11]
+    try:
+        impact=team[11]
+    except:
+        impact=""
     row1 = Players.objects.filter(name__in=row1).order_by('role')
     row2 = Players.objects.filter(name__in=row2).order_by('role')
-    impact = Players.objects.filter(name=impact).order_by('role')
+    if (impact != ""):
+        impact = Players.objects.filter(name=impact).order_by('role')
+    else:
+        impact = ""
     context={'row1':row1,'row2':row2,'impact':impact,'chosen_team':chosen_team.upper()}
     return render(request, 'playingeleven/team.html', context)

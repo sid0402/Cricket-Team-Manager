@@ -1,0 +1,183 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<html>
+    <head>
+    <style>
+        .caption{
+            display:block;
+            font-family: sans-serif;
+            font-size: 15px;
+            text-align: center;
+        }
+
+        .batsmen,.allrounder,.keeper,.bowler {
+            display: inline-flex;
+            flex-flow: row wrap;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        h1, h2, h3{
+            text-align: center;
+        }
+
+        span.row1 select.select1{
+            margin-left:250px;
+        }
+
+        span.row2 select.select2{
+            margin-left:350px;
+        }
+
+        select {
+            padding: 5px 6px;
+            margin-right:4px;
+            text-align: center;
+        }
+        img{
+            width:150px;
+            height:150px;
+        }
+        figcaption{
+            font-size: large;
+        }
+        .impact{
+            text-align: center;
+            position:relative;
+            left:-20px;
+        }
+        .playing11 button{
+            border: 1px solid black;
+            border-radius: 15px;
+            padding:10px 15px;
+            background-color: #05096B;
+            color: white;
+            position:absolute;
+            top: 8%;
+            left:85%;
+            font-size: large;
+        }
+        .social{
+            position:absolute;
+            top:7%;
+            border-radius: 9px;
+            padding: 12px 14px;
+            text-align: center;
+            display:inline-flex;
+        }
+        .facebook,.twitter,.reddit{
+            padding:8px 8px;
+            border-radius:12px;
+            border:1px solid black;
+            margin-right:10px;
+            text-decoration: none;
+        }
+        .facebook{
+            background-color: darkblue;
+            color:white;
+        }
+        .twitter{
+            background-color: dodgerblue;
+            color:white;
+        }
+        .reddit{
+            background-color: red;
+            color:white;
+        }
+        a:link {
+        color: white;
+        }
+        a{
+            text-decoration: none;
+        }
+        /* visited link */
+        a:visited {
+        color: white;
+        }
+
+        /* mouse over link */
+        a:hover {
+        color: white;
+        }
+
+        /* selected link */
+        a:active {
+        color: white;
+        }
+        </style>
+    </head>
+    <body>
+        <h1>{{team}} Squad</h1>
+        <h3>Salary: {{salary}} Cr</h3>
+        <h3>Squad size: {{numplayers}}</h3>
+        <h3>Overseas players: {{overseas}}</h3>
+<div class="squad">
+    <h2>Batsmen</h2>
+<div class="batsmen">
+{% for player in players%}
+{% if player.role == 'Batter'%}
+<figure class="playerbox">
+<img class = "playerimage" id ="drag1" src="{{player.image}}"width="150" height="150" draggable="true" ondragstart=drag(event)>
+<figcaption class="caption">{{player.name}}</figcaption>
+<figcaption class="caption">{{player.salary}} Cr</figcaption>
+</figure>
+{% endif %}
+{% endfor %}
+</div>
+<br>
+<h2>All-Rounders</h2>
+<div class="allrounder">
+{% for player in players%}
+{% if player.role == 'All-Rounder'%}
+<figure class="playerbox">
+<img class = "playerimage" id ="drag1" src="{{player.image}}"width="100" height="100" draggable="true" ondragstart=drag(event)>
+<figcaption class="caption">{{player.name}}</figcaption>
+<figcaption class="caption">{{player.salary}} Cr</figcaption>
+</figure>
+{% endif %}
+{% endfor %}
+</div>
+<br>
+<h2>Wicket-Keepers</h2>
+<div class="keeper">
+{% for player in players%}
+{% if player.role == 'Wicket-Keeper'%}
+<figure class="playerbox">
+<img class = "playerimage" id ="drag1" src="{{player.image}}"width="100" height="100" draggable="true" ondragstart=drag(event)>
+<figcaption class="caption">{{player.name}}</figcaption>
+<figcaption class="caption">{{player.salary}} Cr</figcaption>
+</figure>
+{% endif %}
+{% endfor %}
+</div>
+<br>
+<h2>Bowlers</h2>
+<div class="bowler">
+{% for player in players%}
+{% if player.role == 'Bowler'%}
+<figure class="playerbox">
+<img class = "playerimage" id ="drag1" src="{{player.image}}"width="100" height="100" draggable="true" ondragstart=drag(event)>
+<figcaption class="caption">{{player.name}}</figcaption>
+<figcaption class="caption">{{player.salary}} Cr</figcaption>
+</figure>
+{% endif %}
+{% endfor %}
+</div>
+</div>
+<div class="playing11">
+    <form method="POST" action="/playing-eleven/selector/">
+        {%csrf_token%}
+        <button name="flag" type="submit" value=2>Build Playing 11</button>
+    </form>
+</div>
+<div class="social">
+    {% load social_share %}
+    <div class="facebook">{% post_to_facebook object_or_url %}</div>
+    <div class="twitter">{% post_to_twitter object_or_url %}</div>
+    <div class="reddit">{% post_to_reddit object_or_url %}</div>
+</div>
+</body>
+</html>
+
+{% endblock content %}

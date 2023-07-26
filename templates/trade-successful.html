@@ -93,7 +93,68 @@
             height:100%;
             margin-bottom: 100px;
         }
+        .social{
+            position:absolute;
+            top:7%;
+            right:2.5%;
+            border-radius: 9px;
+            padding: 12px 14px;
+            text-align: center;
+            display:inline-flex;
+        }
+        .facebook,.twitter,.reddit{
+            padding:8px 8px;
+            border-radius:12px;
+            border:1px solid black;
+            margin-right:10px;
+            text-decoration: none;
+        }
+        .facebook{
+            background-color: darkblue;
+            color:white;
+        }
+        .twitter{
+            background-color: dodgerblue;
+            color:white;
+        }
+        .reddit{
+            background-color: red;
+            color:white;
+        }
+        a:link {
+  color: white;
+}
+a{
+    text-decoration: none;
+}
+/* visited link */
+a:visited {
+  color: white;
+}
 
+/* mouse over link */
+a:hover {
+  color: white;
+}
+
+/* selected link */
+a:active {
+  color: white;
+}
+.selectorredirect{
+        display:block;
+        text-align: center;
+        margin-top: 150px;
+    }
+
+    button{
+        padding: 12px 18px;
+        color: white;
+        border-radius: 8px;
+        background-color: #05096B;
+        font-size:16px;
+        text-align: center;
+    }
     </style>
 </head>
 <body>
@@ -148,18 +209,14 @@
 </div>
 </div>
 
-<form name="submitted" action="submitted/" method="POST">
-    {% csrf_token %}
-    <br>
-    <br>
-    <h2 class="discussion">Discuss and submit your trade</h2>
-    <input type="text" name="title" placeholder="Title">
-    <br>
-    <br>
-    <textarea name="description" rows = '10' columns = '30'>Explain your trade</textarea>
-    <br>
-    <input type="Submit" value="Finalize Trade">
-</form>
+<div class="selectorredirect">
+    <h2>MAKE A PLAYING 11 FOR EITHER TEAM WITH THIS TRADE!</h2>
+    <form method="POST" action="/playing-eleven/selector/">
+        {%csrf_token%}
+        <button name="team" type="submit" value="{{team1}}">{{team1}}</button>
+        <button name="team" type="submit" value="{{team2}}">{{team2}}</button>
+    </form>
+</div>
 </body>
 </html>
 

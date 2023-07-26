@@ -185,3 +185,62 @@ players = [
     left:50%;
     top: 40%;
 }
+
+
+DISCUSSION FORUM STUFF FOR TRADE SUBMITTED PAGE
+<form name="submitted" action="submitted/" method="POST">
+    {% csrf_token %}
+    <br>
+    <br>
+    <h2 class="discussion">Discuss and submit your trade</h2>
+    <input type="text" name="title" placeholder="Title">
+    <br>
+    <br>
+    <textarea name="description" rows = '10' columns = '30'>Explain your trade</textarea>
+    <br>
+    <input type="Submit" value="Finalize Trade">
+</form>
+
+
+
+FOR DOING AUCTION SIMULATION AFTER MAKING A TRADE
+THIS IS THE FUNCTION FOR VIEWS IN AUCTION
+
+def retain(request):
+    auction_team = request.POST.get('team')
+    auction_type = request.POST.get('auction_type')
+    request.session['auction_team'] = auction_team
+    request.session['auction_type'] = auction_type
+    flag = request.session['flag']
+    if (flag==1):
+        team1 = request.session['team1']
+        team2 = request.session['team2']
+        players_team1 = request.session['players_team1']
+        players_team2 = request.session['players_team2']
+        if (auction_team == team1):
+            traded_team = []
+            players_team = Players.objects.filter(team = auction_team)
+            for player in players_team:
+                traded_team.append(player.name)
+            for player in players_team2:
+                traded_team.append(player)
+            for player in players_team1:
+                traded_team.remove(player)
+            players = Players.objects.filter(name__in = traded_team)
+        elif (auction_team == team2):
+            traded_team = []
+            players_team = Players.objects.filter(team = auction_team)
+            for player in players_team:
+                traded_team.append(player.name)
+            for player in players_team1:
+                traded_team.append(player)
+            for player in players_team2:
+                traded_team.remove(player)
+            players = Players.objects.filter(name__in = traded_team)
+    else:
+        players = Players.objects.filter(team = auction_team)
+    context = {'team':auction_team, 'auction_type':auction_type,'players':players}
+    if (auction_type=='mega'):
+        return render(request, 'auction/retain.html', context)
+    elif (auction_type=='mini'):
+        return render(request, 'auction/retain-mini.html', context)

@@ -86,7 +86,7 @@ def trade_submitted(request):
     trade_type = request.session['trade_type']
     compensation=request.session['compensation1']
     net_salary = str(request.session['net_salary'])
-    request.session['flag'] = True
+    request.session['flag'] = 1
 
     if (trade_type=='compensation'):
         trade = Trades(team1=team1,team2=team2,
@@ -114,6 +114,8 @@ def trade(request):
     players_team2=request.POST.getlist('player_team2')
     request.session['players_team1'] = players_team1
     request.session['players_team2'] = players_team2
+
+    request.session['flag'] = 1
     
     players_list=[]
     players_dict=[]
@@ -140,6 +142,12 @@ def trade(request):
             context = {'team1':team1,'team2':team2,
             'players':players,
             'compensation':team1_players_compensation, "error":message,'type':trade_type}
+            net_salary = str(request.session['net_salary'])
+            trade = Trades(team1=team1,team2=team2,
+            players_team1=players_team1,
+            compensation=compensation1,
+            trade_type='compensation',net_salary=net_salary)
+            trade.save()
             return render(request, 'trade-successful.html', context)
     else:
         team1_net_salary, team2_net_salary, flag, message = new_details(request, team1, team2, players_team1, players_team2)
@@ -159,6 +167,11 @@ def trade(request):
             context = {'team1':team1,'team2':team2,
             'players':players, "error":message,
             "net1":team1_net_salary, "net2":team2_net_salary,'type':trade_type}
+            trade = Trades(team1=team1,team2=team2,
+            players_team1=players_team1,
+            players_team2=players_team2,
+            trade_type='player',net_salary=team1_net_salary)
+            trade.save()
             return render(request, 'trade-successful.html', context)
 
 def machine(request):

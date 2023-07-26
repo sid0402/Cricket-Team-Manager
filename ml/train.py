@@ -95,7 +95,7 @@ def cor_selector(X, y,num_feats):
     cor_support = [True if i in cor_feature else False for i in feature_name]
     return cor_support, cor_feature
 
-cor_support, cor_feature = cor_selector(X,Y,15)
+cor_support, cor_feature = cor_selector(X_feat,Y,15)
 X_feat = X_feat[cor_feature]
 print(cor_feature)
 
