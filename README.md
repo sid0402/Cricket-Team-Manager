@@ -1,4 +1,4 @@
-# IPL MANAGER WEB APP
+# IPL Manager Web Application
 This web application allows cricket fanatics to put themselves in the shoes of team owners in the Indian Premier League. Users can make hypothetical player trades with other teams, build squads from scratch through the IPL Auction Simulator, and make starting 11s with their original/new squads. 
 
 The project was developing using the Django framework. The backend of this project was built entirely using Python and its libraries, while the front-end was built using HTML and CSS. To learn more about the machine learning model implemented in the code, view this <a href="https://github.com/sid0402/IPL-Price-Predictor">repository.</a>
