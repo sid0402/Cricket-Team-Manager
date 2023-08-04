@@ -1,7 +1,23 @@
 # IPL MANAGER WEB APP
 This web application allows cricket fanatics to put themselves in the shoes of team owners in the Indian Premier League. Users can make hypothetical player trades with other teams, build squads from scratch through the IPL Auction Simulator, and make starting 11s with their original/new squads. 
 
-Once users make trade or build new auctions through the simulated auction, users have the luxury of building their starting 11s with these customized squads. For example, if the user trades MS Dhoni to the Mumbai Indians, the user can make a playing 11 for the Mumbai Indians with MS Dhoni as a part of the squad. This also works for the customized squads built through the auction. 
+Once users make trade or build new auctions through the simulated auction, users have the ability to build their starting 11s with these customized squads. For example, if the user trades MS Dhoni to the Mumbai Indians, the user can make a playing 11 for the Mumbai Indians with MS Dhoni as a part of the squad. This also works for the customized squads built through the auction. 
+
+# Project Structure
+## Django Apps
+- Homepage  --> /home
+- Trade machine --> /machine
+- Playing 11 --> /playingeleven
+- Auction --> /auction
+- Forum --> /forum
+
+The backend for each of these parts of the app are can be found in each subfolders' views.py file. 
+
+## Frontend
+Each of the templates used to build the web app are in /templates. This folder is further segregated into folders containing templates for specific apps.
+## Model and Scrapers
+- Model to predict auction prices --> /ml
+- Scripts to scrape data for /ml and player images --> /scrapers
 
 # Functionality
 ## Home Page
@@ -20,6 +36,6 @@ https://github.com/sid0402/IPL-Manager/assets/36813259/7af35dbd-df83-432e-aa1f-1
 https://github.com/sid0402/IPL-Manager/assets/36813259/41d9938d-0c62-4486-82e2-fd301a8da809
 
 # To Do
+- Improve and deploy the forum section fully, integrated with the user login system
 - Deploy Machine Learning model to predict the prices of players in the auction
 - Create a User Login system
-- Improve and deploy the forum section fully, integrated with the user login system
